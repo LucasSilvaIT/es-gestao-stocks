@@ -8,14 +8,14 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProduto;
+    private Integer idProduct;
 
-    private String nome;
+    private String name;
 
-    private Integer preco;
+    private Integer price;
 
-    private Integer margem;
+    private Integer margin;
 
-    private Integer quantidade;
+    private Integer quantity;
     
 }
