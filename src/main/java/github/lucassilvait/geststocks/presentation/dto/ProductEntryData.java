@@ -11,16 +11,8 @@ import java.io.Serializable;
 public record ProductEntryData(
 
         Integer idProduct,
-        // PASSO 2: Aplicar o grupo ProductCreation.class
-        @NotBlank(message = "O nome é obrigatório", groups = ProductCreation.class)
         String name,
-
-        @NotNull(message = "O preço é obrigatório.", groups = ProductCreation.class)
-        @DecimalMin(value = "0.01", message = "O preço deve ser positivo.", groups = ProductCreation.class)
         Double price,
-
-        @NotNull(message = "A margem é obrigatória.", groups = ProductCreation.class)
-        @DecimalMin(value = "0.0", message = "A margem não pode ser negativa.", groups = ProductCreation.class)
         Double margin,
 
         @NotNull(message = "A quantidade de entrada é obrigatória.")
