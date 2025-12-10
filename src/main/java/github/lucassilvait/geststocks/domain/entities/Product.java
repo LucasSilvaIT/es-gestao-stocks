@@ -10,7 +10,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProduct;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -42,6 +42,10 @@ public class Product {
     }
 
     // Getters and Setters
+
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
+    }
 
     public Integer getIdProduct() {
         return idProduct;

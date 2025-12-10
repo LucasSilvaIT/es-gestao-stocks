@@ -6,7 +6,7 @@ import github.lucassilvait.geststocks.domain.entities.Product;
 import github.lucassilvait.geststocks.domain.entities.StockMovement;
 import github.lucassilvait.geststocks.domain.entities.StockMovement.TypeMovement;
 import github.lucassilvait.geststocks.presentation.dto.ProductEntryData;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -67,7 +67,16 @@ public class StockService {
             Optional<Product> existingProduct = productRepository.findById(data.idProduct());
             if (existingProduct.isPresent()) {
                 return existingProduct.get();
+            } else {
+                throw new IllegalArgumentException("Produto com o ID " + data.idProduct() + " não existe no sistema.");
             }
+        }
+
+        Optional<Product> existingProductByName = productRepository.findByName(data.name());
+
+        if (existingProductByName.isPresent()) {
+            Integer existingId = existingProductByName.get().getIdProduct();
+            throw new IllegalArgumentException("Erro de Registo: Já existe um produto com o nome '" + data.name() + "'. Para adicionar novo stock a este produto deverá adicionar através do ID " + existingId +  ".");
         }
 
         return new Product(
